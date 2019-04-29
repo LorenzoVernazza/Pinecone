@@ -1,20 +1,34 @@
 {
   "name": "pinecone-logger",
   "version": "1.0.0",
-  "description": "",
+  "description": "Small Javascript logger",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Lorenzo Vernazza",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2"
   },
   "optionalDependencies": {
     "moment": "^2.24.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LorenzoVernazza/PineCone.git"
+  },
+  "keywords": [
+    "logger",
+    "log"
+  ],
+  "bugs": {
+    "url": "https://github.com/LorenzoVernazza/PineCone/issues"
+  },
+  "homepage": "https://github.com/LorenzoVernazza/PineCone#readme"
 }
