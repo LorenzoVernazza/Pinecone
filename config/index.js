@@ -24,6 +24,8 @@ exports.levels = [{
 }];
 
 exports.defaults = {
+	async: true,
+
 	name: '',
 	nameColor: 'grey',
 	nameTransform: 'uppercase',
