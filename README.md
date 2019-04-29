@@ -1,4 +1,4 @@
-# PineCone Logger
+# Pinecone Logger
 
 Small and fast logger.
 
