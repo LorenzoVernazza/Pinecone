@@ -1,3 +1,6 @@
 .eslintrc
 .gitignore
+.vscode
 node_modules
+test
+old

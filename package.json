@@ -1,11 +1,10 @@
 {
   "name": "pinecone-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small Javascript logger",
   "main": "index.js",
   "directories": {
-    "lib": "lib",
-    "test": "test"
+    "lib": "lib"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
