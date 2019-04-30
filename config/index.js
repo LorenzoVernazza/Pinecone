@@ -40,5 +40,8 @@ exports.defaults = {
 
 	showDate: 'true',
 	showLevel: 'true',
-	showName: 'true'
+	showName: 'true',
+
+	secretReplacement: '*',
+	secretLevel: 'debug'
 };

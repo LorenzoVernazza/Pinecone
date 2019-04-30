@@ -5,16 +5,18 @@ type Color = 'red' | 'green' | 'blue' | 'cyan' | 'magenta' | 'grey' | 'white';
 type Level = 'fatal' | 'error' | 'warn' | 'success' | 'info' | 'debug' | 'trace';
 
 declare class Logger {
-    /**
-     * Provides a separator for multi-line logs.
-     */
+    /** Provides a separator for multi-line logs. */
     br: Separator;
-    /**
-     * Returns a colored string.
-     */
-    color(/** Output color. */ color: Color, /** Input string. */ value: string) : string;
+
+    /** Returns a colored string. */
+    color(/** Output color. */ color: Color, /** Input string. */ value: string): string;
+
     /** Returns available colors. */
     colors: string[];
+
+    /** Hides a string if the logger level is too low. */
+    secret(/** String to mask. */value: string, /** Replacement char, default *. */replacement?: string, /** Level required. */level?: Level): object;
+ 
     /** Creates a new logger instance. */
     new(
         /** New logger options. */
@@ -45,6 +47,12 @@ declare class Logger {
             stdout?: Stream.writable,
             /** Standard error. */
             stderr?: Stream.writable
+            /** Use async calls. */
+            async?: boolean,
+            /** Replacement char for secrets, default *. */
+            secretReplacement,
+            /** Required level for secrets, default "debug". */
+            secretLevel
         }
     ): Logger;
 

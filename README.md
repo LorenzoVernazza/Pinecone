@@ -27,16 +27,16 @@ Default levels are inspired by log4j levels.
 
 Several options are available to customize the logger.
 
-```javascript
-	const errLogger = require('pinecone-logger').new({ 
-		name: 'errorLevelLogger',
-		nameTransform: false,
-		showDate: false,
-		level: 'error' //same as 1
-	});
+```js
+const errLogger = require('pinecone-logger').new({ 
+	name: 'errorLevelLogger',
+	nameTransform: false,
+	showDate: false,
+	level: 'error' //same as 1
+});
 
-	errLogger.info('Hello world!'); //Outputs nothing, "info" is higher than "error".
-	errLogger.error('Some error!'); //Outputs: "[ERROR] errorLevelLogger - Some error!"
+errLogger.info('Hello world!'); //Outputs nothing, "info" is higher than "error".
+errLogger.error('Some error!'); //Outputs: "[ERROR] errorLevelLogger - Some error!"
 ```
 
 | Option | Default | Description |
@@ -54,3 +54,34 @@ Several options are available to customize the logger.
 | showName | true | Shows or hides name information. |
 | stdout | process.stdout | Stdout stream, can be any writable stream or object with .write(chunk) method. |
 | stderr | process.stderr | Stderr stream, can be any writable stream or object with .write(chunk) method. |
+| async | true | Makes the logger async. |
+| secretReplacement | "*" | Replacement char for secrets. |
+| secretLevel | "debug" | Required level for secrets to be visible. |
+
+### Secrets
+
+Secrets help hiding sensible information while in production.
+
+```js
+const infoLogger = require('pinecone-logger').new({ 
+	name: 'infoLogger',
+	level: 'info'
+});	
+const debugLogger = require('pinecone-logger').new({ 
+	name: 'debugLogger',
+	level: 'debug'
+});
+const user = "foo";
+const password = "bar123!";
+const secret = infoLogger.secret(password);
+
+// When the secret is a single argument it is resolved while the log is processed by the logger.
+infoLogger.info('User', user, 'logged in with password:', secret); //Outputs: "User foo logged in with password *******".
+debugLogger.info('User', user, 'logged in with password:', secret); //Outputs: "User foo logged in with password bar123!".
+
+// String concatenation resolves the secret before the processing instead, so, if logger level < secret level, secret will be masked.
+infoLogger.info('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
+debugLogger.info('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
+console.log('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
+debugLogger.info('User ' + user + ' logged in with password: ' + debugLogger.secret(password)); //Outputs "User foo logged in with password bar123!" since both debugLogger and secret levels are "debug".
+```
