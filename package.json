@@ -20,14 +20,14 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LorenzoVernazza/PineCone.git"
+    "url": "git+https://github.com/LorenzoVernazza/Pinecone.git"
   },
   "keywords": [
     "logger",
     "log"
   ],
   "bugs": {
-    "url": "https://github.com/LorenzoVernazza/PineCone/issues"
+    "url": "https://github.com/LorenzoVernazza/Pinecone/issues"
   },
-  "homepage": "https://github.com/LorenzoVernazza/PineCone#readme"
+  "homepage": "https://github.com/LorenzoVernazza/Pinecone#readme"
 }
