@@ -1,4 +1,4 @@
-import { Stream } from "stream";
+import stream from "stream";
 
 type Separator = Symbol;
 type Color = 'red' | 'green' | 'blue' | 'cyan' | 'magenta' | 'grey' | 'white';
@@ -16,7 +16,9 @@ declare class Logger {
 
     /** Hides a string if the logger level is too low. */
     secret(/** String to mask. */value: string, /** Additional options. */options?: {
-        /** Replacement char, default *. */replacement?: string, 
+        /** Mask or Replacement Char, default *. */
+        /** * if mask length <= 1 each char will be replaced by the mask. */
+        /** * if mask length > 1 the whole string will be replaced by the mask. */mask?: string, 
         /** Level required. */level?: Level,
         /** Maximum length when masked. */maxLength: number
     }): object;
@@ -48,15 +50,19 @@ declare class Logger {
             /** Default separator for log infos and new lines. */
             separator?: string,
             /** Standard output. */
-            stdout?: Stream.writable,
+            stdout?: stream.Writable,
             /** Standard error. */
-            stderr?: Stream.writable
+            stderr?: stream.Writable,
             /** Use async calls. */
             async?: boolean,
-            /** Replacement char for secrets, default *. */
-            secretReplacement,
+            /** Mask or Replacement Char for secrets, default *. */
+            /** * if mask length <= 1 each char will be replaced by the mask. */
+            /** * if mask length > 1 the whole string will be replaced by the mask. */
+            secretMask?: string,
             /** Required level for secrets, default "debug". */
-            secretLevel
+            secretLevel?: Level,
+            /** Maximum length displayed of masked secrets, disabled by default. */
+            secretMaxLength?: number
         }
     ): Logger;
 
@@ -64,8 +70,8 @@ declare class Logger {
     log(/** Value to print. */value: any): void;
     
     /** Logger constructor, applies levels. */
-	constructor(printFunction: function, levels: object[], others: object);
+	constructor(printFunction: () => {}, levels: object[], others: object);
 }
 
-const myLogger = new Logger();
+declare const myLogger: Logger;
 export = myLogger;

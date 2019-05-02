@@ -55,8 +55,9 @@ errLogger.error('Some error!'); //Outputs: "[ERROR] errorLevelLogger - Some erro
 | stdout | process.stdout | Stdout stream, can be any writable stream or object with .write(chunk) method. |
 | stderr | process.stderr | Stderr stream, can be any writable stream or object with .write(chunk) method. |
 | async | true | Makes the logger async. |
-| secretReplacement | "*" | Replacement char for secrets. |
+| secretMask | "*" | Mask or Replacement Char for secrets, default *. |
 | secretLevel | "debug" | Required level for secrets to be visible. |
+| secretMaxLength | false | Limits the number of chars for masked secrets to improve readability. |
 
 ### Secrets
 

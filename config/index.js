@@ -42,6 +42,6 @@ exports.defaults = {
 	showLevel: 'true',
 	showName: 'true',
 
-	secretReplacement: '*',
+	secretMask: '*',
 	secretLevel: 'debug'
 };
