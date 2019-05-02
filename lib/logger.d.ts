@@ -15,7 +15,11 @@ declare class Logger {
     colors: string[];
 
     /** Hides a string if the logger level is too low. */
-    secret(/** String to mask. */value: string, /** Replacement char, default *. */replacement?: string, /** Level required. */level?: Level): object;
+    secret(/** String to mask. */value: string, /** Additional options. */options?: {
+        /** Replacement char, default *. */replacement?: string, 
+        /** Level required. */level?: Level,
+        /** Maximum length when masked. */maxLength: number
+    }): object;
  
     /** Creates a new logger instance. */
     new(
