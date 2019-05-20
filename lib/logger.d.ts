@@ -1,4 +1,5 @@
 import stream from "stream";
+const Timer = require('./classes/Timer');
 
 type Separator = Symbol;
 type Color = 'red' | 'green' | 'blue' | 'cyan' | 'magenta' | 'grey' | 'white';
@@ -22,6 +23,9 @@ declare class Logger {
         /** Level required. */level?: Level,
         /** Maximum length when masked. */maxLength: number
     }): object;
+
+    /** Timer functions. */
+    timers: Timer;
  
     /** Creates a new logger instance. */
     new(

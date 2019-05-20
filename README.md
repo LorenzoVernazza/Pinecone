@@ -86,3 +86,56 @@ debugLogger.info('User ' + user + ' logged in with password: ' + secret); //Outp
 console.log('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
 debugLogger.info('User ' + user + ' logged in with password: ' + debugLogger.secret(password)); //Outputs "User foo logged in with password bar123!" since both debugLogger and secret levels are "debug".
 ```
+
+### Timers
+
+Timers help visualizing how long is a given task. Timers are accessible from any logger from .timers property.
+
+#### Logger .timers methods
+
+| Method | Args | Description |
+| ------ | --- | ------ |
+| new() | name (string, optional) | Creates new timer. |
+| get() | name (string) or id (number) | Finds Timer by name or id. |
+| start() | name (string) or id (number) | Finds and starts a timer. |
+| stop() | name (string) or id (number) | Finds and stops a timer. |
+| resolve() | name (string) or id (number) | Finds and resolves a timer. |
+| valueOf() | name (string) or id (number)| Finds and returns the value of a timer. |
+
+#### Timer methods
+
+| Property | Description |
+| ------ | --- | ------ |
+| id | Returns timer id. |
+| value | Returns timer value. |
+
+| Method | Description |
+| ------ | --- | ------ |
+| start() | Starts the timer. |
+| stop() | Stops the timer. Can be resumed with "start()" |
+| resolve() | Resolves the timer. |
+
+By resolving a timer its value will be returned and the timer itself will be deleted. Use "value" and "valueOf" to access value without stopping or destroying the timer.
+
+```js
+const logger = require('pinecone-logger').new({ name: 'testLogger' });
+const timer = logger.timers.start('timer1');
+
+setTimeout(() => { // Waits 500ms
+	const value = timer.value;
+	logger.log('Testing timer after 500ms: ' + value.pretty + '(' + value + 'ms).'); 
+	// Outputs "Testing timer after 500ms: 500ms (500ms).".
+	logger.log('Pausing timer for 200ms');
+	timer.stop(); // Stops timer.
+	setTimeout(() => {
+		logger.timers.start('timer1'); // Starts timer by name.
+	}, 200);
+}, 500);
+
+setTimeout(() => { // Waits 1400ms
+	const value = logger.timers.resolve(timer.toString()); // Resolves timer by id
+	logger.log("Resolving timer after 1400ms, paused for 200ms: " + value.pretty + '(' + value + 'ms).');
+	// Outputs "Resolving timer after 1400ms, paused for 200ms: 1s 200ms (1200ms).".
+	// Timer counted only 1200ms as it was stopped for 200ms.
+}, 1400);
+```
