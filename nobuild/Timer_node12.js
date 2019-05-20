@@ -15,40 +15,43 @@ function prettify(time) {
 }
 
 class Timer {
-	#value = 0;
 	#time = 0;
-	#id;
+	id;
 	constructor(id, name) {
-		this.#id = id;
+		this.id = id;
 		this.name = name;
 	}
-	get id() {
-		return this.#id;
+	get id() { return this.id };
+	set id(next) {};
+	get value() {
+		const value = (this.#time > 0 ? Date.now() : 0) - this.#time;
+		return {
+			get pretty() { return prettify(value) },
+			toString() { return value }
+		};
 	}
 	start() {
-		if (!this.#time) this.#time = Date.now();
+		if (this.#time <= 0) {
+			this.#time += Date.now();
+		}
 	}
 	stop() {
-		if (this.#time) { 
-			this.#value += Date.now() - this.#time;
-			this.#time = 0;
+		if (this.#time > 0) {
+			this.#time -= Date.now();
 		}
 	}
 	resolve() {
 		this.stop();
-		delete timers(this.#id);
-		return {
-			toString() { return this.#value },
-			get pretty() { return prettify(this.#value) }
-		};
+		delete timers[this.id];
+		return this.value;
 	}
 	toString() {
-		return this.#id;
+		return this.id;
 	}
 }
 
 function getByName(findName) {
-	return Object.values(timers).find(({ name }) => { name === findName });
+	return Object.values(timers).find(({ name }) => ( name === findName ));
 }
 function getTimer(idOrName) {
 	if (typeof idOrName === 'string') {
@@ -58,7 +61,10 @@ function getTimer(idOrName) {
 	} else return undefined;
 }
 function newTimer(name) {
-	return new Timer(++globalIndex, name)
+	const index = ++globalIndex;
+	const timer = new Timer(index, name);
+	timers[index] = timer;
+	return timer;
 }
 function start(idOrName) {
 	var timer;
@@ -70,11 +76,11 @@ function start(idOrName) {
 	timer.start();
 	return timer;
 }
-function stop(idOrName) {
+function stop(idOrName, deleteTimer = false) {
 	var timer;
 	if (idOrName) timer = getTimer(idOrName);
 	if (timer) { 
-		timer.stop();
+		timer.stop(deleteTimer);
 		return true;
 	} else {
 		return undefined;
@@ -89,14 +95,22 @@ function resolve(idOrName) {
 		return undefined;
 	}
 }
+function valueOf(idOrName) {
+	var timer;
+	if (idOrName) timer = getTimer(idOrName);
+	if (timer) { 
+		return timer.value();
+	} else {
+		return undefined;
+	}
+}
 
 module.exports = {
+	// Timer,
 	get: getTimer,
 	new: newTimer,
 	start,
 	stop,
+	valueOf,
 	resolve
 };
-
-// TEST
-console.log(getByName('test'))
