@@ -102,15 +102,15 @@ Timers help visualizing how long is a given task. Timers are accessible from any
 | resolve() | name (string) or id (number) | Finds and resolves a timer. |
 | valueOf() | name (string) or id (number)| Finds and returns the value of a timer. |
 
-#### Timer methods
+#### Timer object
 
 | Property | Description |
-| ------ | --- | ------ |
+| ------ | ------ |
 | id | Returns timer id. |
 | value | Returns timer value. |
 
 | Method | Description |
-| ------ | --- | ------ |
+| ------ | ------ |
 | start() | Starts the timer. |
 | stop() | Stops the timer. Can be resumed with "start()" |
 | resolve() | Resolves the timer. |
