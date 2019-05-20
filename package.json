@@ -24,7 +24,8 @@
   },
   "keywords": [
     "logger",
-    "log"
+    "log",
+    "pinecone"
   ],
   "bugs": {
     "url": "https://github.com/LorenzoVernazza/Pinecone/issues"
