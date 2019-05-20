@@ -24,6 +24,8 @@ exports.levels = [{
 }];
 
 exports.defaults = {
+	async: true,
+
 	name: '',
 	nameColor: 'grey',
 	nameTransform: 'uppercase',
@@ -34,9 +36,12 @@ exports.defaults = {
 
 	colorObjects: 'true',
 	inspectDepth: 3,
-	level: 'debug',
+	level: process.env.PINECONE_LEVEL || 'debug',
 
 	showDate: 'true',
 	showLevel: 'true',
-	showName: 'true'
+	showName: 'true',
+
+	secretMask: '*',
+	secretLevel: 'debug'
 };
