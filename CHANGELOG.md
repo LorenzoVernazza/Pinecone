@@ -1,9 +1,8 @@
-# <b>Pinecone v1.3.4 (Current), 27-5-2019</b>
+# <b>Pinecone v1.3.5 (Current), 27-5-2019</b>
 
 <!-- ### &nbsp;&nbsp;<b>Changes:</b> -->
 ### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
-* Minor optimization for secrets with empty mask.
-* Fix for BR element.
+* Fixed secrets with non-string values not working as intended.
 
 ---
 
@@ -22,6 +21,12 @@
 
 ## <b>Previous versions</b>
 
+### Version v1.3.4, 27-5-2019</b>
+
+#### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
+* Minor optimization for secrets with empty mask.
+* Fix for BR element.
+  
 ### Version v1.3.3, 24-5-2019</b>
 
 #### &nbsp;&nbsp;<b>Changes:</b>
