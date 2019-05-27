@@ -28,6 +28,18 @@ infoLogger.info('String contatenation resolves the secret immediatly, this shoul
 infoLogger.info('And this shouldn\'t: ' + logger.secret('some secret'));
 infoLogger.debug('And since i log up to "info" this will never print!');
 
+// const obj1 = {
+// 	prop: 'I\'m an object.'
+// };
+// const obj2 = {
+// 	prop: 'I\'m an object.',
+// 	toString() {
+// 		return this.prop.replace('.', 'with overloaded toString().');
+// 	}
+// };
+// logger.success('Standard object:', obj1);
+// logger.success('Overloaded object:', obj2);
+
 const timer = logger.timers.start('timer1');
 
 setTimeout(() => {
@@ -42,5 +54,5 @@ setTimeout(() => {
 
 setTimeout(() => {
 	const value = logger.timers.resolve(timer.toString());
-	logger.log("Resolving timer after 1400ms, paused for 200ms: " + value.pretty + '(' + value + 'ms).');
+	logger.log('Resolving timer after 1400ms, paused for 200ms: ' + value.pretty + '(' + value + 'ms).');
 }, 1400);
