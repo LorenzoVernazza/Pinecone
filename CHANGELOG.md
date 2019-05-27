@@ -1,19 +1,18 @@
-# <b>Pinecone v1.3.3 (Current), 24-5-2019</b>
+# <b>Pinecone v1.3.4 (Current), 27-5-2019</b>
 
-### &nbsp;&nbsp;<b>Changes:</b>
-* Reverted .br to a class so can be converted to string.
+<!-- ### &nbsp;&nbsp;<b>Changes:</b> -->
 ### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
-* Fixed error with non-string secrets.
+* Minor optimization for secrets with empty mask.
+* Fix for BR element.
 
 ---
 
 ## <b>What's next?</b>
 
-### &nbsp;<b>Done:</b>
+<!-- ### &nbsp;<b>Done:</b> -->
 <!-- #### &nbsp;&nbsp;<b>Changes:</b> -->
-#### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
-* Minor optimization for secrets with empty mask.
-  
+<!-- #### &nbsp;&nbsp;<b>Fixes & optimizations:</b> -->
+
 ### &nbsp;<b>To do:</b>
 #### &nbsp;&nbsp;<b>Changes:</b>
 * JSON logs with pluggable transporters.
@@ -22,6 +21,13 @@
 ---
 
 ## <b>Previous versions</b>
+
+### Version v1.3.3, 24-5-2019</b>
+
+#### &nbsp;&nbsp;<b>Changes:</b>
+* Reverted .br to a class so can be converted to string.
+#### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
+* Fixed error with non-string secrets.
 
 ### Version 1.3.2, 23-5-2019
 
