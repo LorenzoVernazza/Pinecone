@@ -36,6 +36,7 @@ exports.defaults = {
 
 	colorObjects: 'true',
 	inspectDepth: 3,
+	inspectAll: false,
 	level: process.env.PINECONE_LEVEL || 'debug',
 
 	showDate: 'true',

@@ -1,4 +1,5 @@
 import stream from "stream";
+import { InspectOptions } from "util";
 const Timer = require('./classes/Timer');
 
 type Separator = Symbol;
@@ -26,6 +27,9 @@ declare class Logger {
 
     /** Timer functions. */
     timers: Timer;
+
+    /** Wraps util.inspect to inspect objects. */
+    inspect(/** Element to inspect. */element: any, /** Options. */options: InspectOptions): string;
  
     /** Creates a new logger instance. */
     new(
@@ -41,6 +45,8 @@ declare class Logger {
             colorObjects?: boolean,
             /** Inspect depth. */
             inspectDepth?: number,
+            /** Ignores toString() methods and inspect all objects regardless. */
+            inspectAll?: boolean,
             /** Maximum log level printed. */
             level?: Level,
             /** Shows/Hides logger name from logs. */
