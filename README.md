@@ -1,6 +1,10 @@
 # Pinecone Logger
 
-Small and fast logger.
+Small and fast logger, full of seeds!<br><br>
+[![npm version](https://badge.fury.io/js/pinecone-logger.svg)](https://badge.fury.io/js/pinecone-logger)
+[![dependencies Status](https://david-dm.org/LorenzoVernazza/pinecone/status.svg)](https://david-dm.org/LorenzoVernazza/pinecone)
+<!-- [![Coverage Status](https://coveralls.io/repos/github/LorenzoVernazza/Pinecone/badge.svg?branch=master)](https://coveralls.io/github/LorenzoVernazza/Pinecone?branch=master) -->
+<!-- [![Build Status](https://travis-ci.org/LorenzoVernazza/Pinecone.svg?branch=master)](https://travis-ci.org/LorenzoVernazza/Pinecone) -->
 
 ```javascript
 const logger = require('pinecone-logger').new({ name: 'testLogger' });
