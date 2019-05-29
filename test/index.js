@@ -22,7 +22,7 @@ loggerEmitter.info('I inherit my father\'s options so even this secret is clear:
 const secretObject = {
 	value: 'I\'m an object!'
 };
-logger.info('I even work with objects:', logger.secret(logger.br), logger.secret(secretObject));
+logger.info('I even work with objects:', logger.secret(logger.br + 'Test:'), logger.secret(secretObject));
 
 infoLogger.info('I instead log up to "info" so this secret is masked:', infoLogger.secret('some secret'));
 infoLogger.info('This is the same secret but has max length of 4:', infoLogger.secret('some secret', {
