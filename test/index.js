@@ -63,3 +63,18 @@ setTimeout(() => {
 	const value = logger.timers.resolve(timer.toString());
 	logger.log('Resolving timer after 1400ms, paused for 200ms: ' + value.pretty + '(' + value + 'ms).');
 }, 1400);
+
+const zerologger = require('..').new({ name: 'zerologger', level: 0 });
+zerologger.info('I have a logger level of 0.');
+zerologger.fatal('I have a logger level of 0.');
+zerologger.log('I have a logger level of 0.');
+
+const silentlogger = require('..').new({ name: 'silentlogger', level: 'silent' });
+silentlogger.info('I have a logger level of -1.');
+silentlogger.fatal('I have a logger level of -1.');
+silentlogger.log('I have a logger level of -1.');
+
+const negativelogger = require('..').new({ name: 'negativelogger', level: -2 });
+negativelogger.info('I have a logger level of -2.');
+negativelogger.fatal('I have a logger level of -2.');
+negativelogger.log('I have a logger level of -2.');

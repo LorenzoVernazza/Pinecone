@@ -1,7 +1,8 @@
-# <b>Pinecone v1.3.6 (Current), 28-5-2019</b>
+# <b>Pinecone v1.3.8 (Current), 30-5-2019</b>
 ### &nbsp;&nbsp;<b>Changes:</b>
-* If a toString() method is defined now it has priority over object inspection.
-
+* Added silent max level (-1) to disable any log (still logs .log()).
+### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
+* Fixed logger.br not being colored after being cast to string.
 ---
 ## <b>What's next?</b>
 ### &nbsp;<b>To do:</b>
@@ -10,9 +11,15 @@
 
 ---
 ## <b>Previous versions:</b>
+### Version 1.3.6, 28-5-2019
+	
+#### &nbsp;&nbsp;<b>Changes:</b>
+* If a toString() method is defined now it has priority over object inspection.
+
+---
 ### Version 1.3.5, 27-5-2019
 
-#### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
+### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
 * Fixed secrets with non-string values not working as intended.
 ---
 ### Version 1.3.4, 27-5-2019
