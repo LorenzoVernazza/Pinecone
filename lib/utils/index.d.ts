@@ -22,12 +22,16 @@ function inspect(/** Element to inspect. */element, options: InspectOptions): st
     
 /** Colorize text. */
 function colorize(/** Input to color. */input: string, /** Color to use. */color: string): string;
-	
+
+/** Pads a string. */
+function padString(/** String to pad. */input: string, /** Number of chars to add. */number: number, /** Char to fill with. */fill: string, /** Pads from start instead of end. */start: boolean): string;
+
 export = {
     formatDate,
     transformText,
     isTrue,
     isFalse,
     inspect,
-    colorize
+    colorize,
+    padString
 }

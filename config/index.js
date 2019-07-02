@@ -34,6 +34,9 @@ exports.defaults = {
 
 	separator: process.env.PINECONE_SEPARATOR || '-',
 
+	ellipsisAt: process.env.PINECONE_ELLIPSIS_AT || 64,
+	maxLength: process.env.PINECONE_MAX_LOG_LENGTH || 0,
+
 	disableColors: process.env.PINECONE_NO_COLORS || 'false',
 	colorObjects: process.env.PINECONE_COLOR_OBJECTS || 'true',
 	inspectDepth: process.env.PINECONE_INSPECT_DEPTH || 3,
