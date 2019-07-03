@@ -24,7 +24,7 @@ exports.levels = [{
 }];
 
 exports.defaults = {
-	mode: process.env.PINECONE_MODE || 'async',
+	// mode: process.env.PINECONE_MODE || 'async',
 
 	name: process.env.PINECONE_DEFAULT_NAME || '',
 	nameColor: process.env.PINECONE_NAME_COLOR || 'grey',

@@ -60,7 +60,7 @@ function resolve(/** Timer name or id. */idOrName: string | number): { pretty: s
  */
 function valueOf(/** Timer name or id. */idOrName: string | number): { pretty: string } | number;
 
-module.exports = {
+export = {
 	Timer,
 	/**
 	 * Finds Timer by name or id.

@@ -1,16 +1,26 @@
-# <b>Pinecone v1.3.8 (Current), 30-5-2019</b>
+# <b>Pinecone v2.0.0 (Current), 3-7-2019</b>
 ### &nbsp;&nbsp;<b>Changes:</b>
-* Added silent max level (-1) to disable any log (still logs .log()).
-### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
-* Fixed logger.br not being colored after being cast to string.
+* Release 2.0.0!
+* Totally reviewed internal mechanics, is now easier to mantain and upgrade.
+* Added titles, easy tool to write framed titles.
+* Added groups, can spread logs to multiple loggers with a single call.
+* Added ellipsis, can trim logs bigger than given length.
+
 ---
 ## <b>What's next?</b>
 ### &nbsp;<b>To do:</b>
 #### &nbsp;&nbsp;<b>Changes:</b>
-* JSON logs with pluggable transporters.
+* No planned changes.
 
 ---
 ## <b>Previous versions:</b>
+### Version 1.3.8, 30-5-2019
+	
+#### &nbsp;&nbsp;<b>Changes:</b>
+* Added silent max level (-1) to disable any log (still logs .log()).
+#### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
+* Fixed logger.br not being colored after being cast to string.
+---
 ### Version 1.3.6, 28-5-2019
 	
 #### &nbsp;&nbsp;<b>Changes:</b>

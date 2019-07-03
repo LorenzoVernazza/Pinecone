@@ -6,5 +6,5 @@
 
 ### &nbsp;<b>To do:</b>
 #### &nbsp;&nbsp;<b>Changes:</b>
-* JSON logs with pluggable transporters.
+* No planned changes
 <!-- #### &nbsp;&nbsp;<b>Fixes & optimizations:</b> -->

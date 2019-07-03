@@ -14,7 +14,7 @@ logger.debug('Debug log!');
 logger.trace('Trace log!');
 logger.log();
 
-logger.warn(logger.title(['I\'m a title!', 'Now testing .apply() and loggers hierarchy.'], { color: 'cyan', borderColor: 'magenta', align: 'right' }));
+logger.warn(logger.title(['I\'m a title!', '', 'Now testing .apply() and loggers hierarchy.'], { color: 'cyan', frameColor: 'magenta' }));
 logger.apply({ disableColors: true });
 const sadLogger = require('..').new({ name: 'sadLogger', level: 'info' });
 logger.info('Colors have been disabled.', testObject);
@@ -27,7 +27,7 @@ infoLogger.info('Colors are still enabled for me.', testObject);
 // const loggerEmitter = logger.emitter('testEmitter');
 // loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!');
 logger.log();
-logger.warn(logger.title(['I\'m a centered title with type 1 and char "="!', '', 'Now testing Secrets.'], { color: 'cyan', borderColor: 'magenta', char: '=', type: 1, align: 'center' }));
+logger.warn(logger.title(['I\'m a centered title with type 1, char "=" and sideChar "||"!', '', 'Now testing Secrets.'], { color: 'cyan', frameColor: 'magenta', char: '=', type: 1, align: 'center', sideChar: '||', side: 0 }));
 
 logger.info('I log up to "trace" so this secret is clear:', logger.secret('some secret'));
 // loggerEmitter.info('I inherit my father\'s options so even this secret is clear:', logger.secret('some secret', {
@@ -47,7 +47,38 @@ infoLogger.info('And this shouldn\'t: ' + logger.secret('some secret'));
 infoLogger.debug('And since i log up to "info" this will never print!');
 
 logger.log();
-logger.warn(logger.title('Now testing Timers.', { color: 'cyan', borderColor: 'magenta', type: 2 }));
+const maxLengthLogger = logger.new({ name: 'maxLengthLogger', maxLength: 30 });
+logger.success('Ellipsis:',
+	logger.br, logger.ellipsis('Testing ellipsis, max 100 chars.', 100), 
+	logger.br, logger.ellipsis('Testing ellipsis, max 10 chars.', 10, '....'),
+	logger.br, logger.ellipsis('1234567890', 6),
+	logger.br, logger.ellipsis('1234567890', 6, ';')
+);
+maxLengthLogger.info('This logger has a max length of 30, longer logs will be trimmed.')
+
+logger.log();
+logger.warn(logger.title('Now testing Groups...', { color: 'cyan', frameColor: 'magenta', align: 'right', type: 1 }));
+
+const loggerParent = logger.new({ name: 'GroupLeader', level: 'info' });
+const loggerChild1 = logger.new({ name: 'GroupMember1' });
+const loggerChild2 = logger.new({ name: 'GroupMember2' });
+
+loggerParent.info('I\'ll be the group leader, my level is', loggerParent.level );
+loggerChild1.info('I\'ll be the group member 1, my level is', loggerChild1.level );
+loggerChild2.info('I\'ll be the group member 2, my level is', loggerChild2.level );
+logger.log();
+const loggerGroup = loggerParent.newGroup(loggerChild1);
+loggerGroup.info('This is from a group, should be printed twice.');
+loggerGroup.debug('This is also from a group, but should only be printed once from member 1.');
+loggerGroup.add(loggerChild2);
+loggerGroup.success('New logger added to group.', 'This should be printed three times.');
+loggerGroup.remove(0);
+loggerGroup.remove(loggerChild2);
+loggerGroup.warn('All members removed from group.', 'This should be printed once.');
+
+
+logger.log();
+logger.warn(logger.title(['I\'m a right-aligned title with type 2!', '', 'Now testing Timers.'], { color: 'cyan', frameColor: 'magenta', align: 'right', type: 2 }));
 
 const obj1 = {
 	prop: 'I\'m an object.'
@@ -92,3 +123,5 @@ const negativelogger = require('..').new({ name: 'negativelogger', level: -2 });
 negativelogger.info('I have a logger level of -2.');
 negativelogger.fatal('I have a logger level of -2.');
 negativelogger.log('I have a logger level of -2.');
+
+logger
