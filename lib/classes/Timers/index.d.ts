@@ -6,9 +6,6 @@ var globalIndex = 0;
  */
 function prettify(/** Time in milliseconds */time: number): string;
 
-/**
- * Timer class. Represents a timer with start, stop and resolve methods.
- */
 declare class Timer {
 	/** Timer stored value. */
 	value: { pretty: string } | number;
@@ -60,7 +57,10 @@ function resolve(/** Timer name or id. */idOrName: string | number): { pretty: s
  */
 function valueOf(/** Timer name or id. */idOrName: string | number): { pretty: string } | number;
 
-module.exports = {
+export = {
+	/**
+	 * Timer class. Represents a timer with start, stop and resolve methods.
+	 */
 	Timer,
 	/**
 	 * Finds Timer by name or id.

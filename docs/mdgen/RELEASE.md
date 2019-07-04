@@ -1,6 +1,8 @@
-### Version 1.3.8, 30-5-2019
+### Version 2.0.0, 3-7-2019
 	
 ### &nbsp;&nbsp;<b>Changes:</b>
-* Added silent max level (-1) to disable any log (still logs .log()).
-### &nbsp;&nbsp;<b>Fixes & optimizations:</b>
-* Fixed logger.br not being colored after being cast to string.
+* Release 2.0.0
+* Totally reviewed internal mechanics, is now easier to mantain and upgrade.
+* Added titles, easy tool to write framed titles.
+* Added groups, can spread logs to multiple loggers with a single call.
+* Added ellipsis, can trim logs bigger than given length.
