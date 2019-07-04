@@ -49,12 +49,12 @@ infoLogger.debug('And since i log up to "info" this will never print!');
 logger.log();
 const maxLengthLogger = logger.new({ name: 'maxLengthLogger', maxLength: 30 });
 logger.success('Ellipsis:',
-	logger.br, logger.ellipsis('Testing ellipsis, max 100 chars.', 100), 
+	logger.br, logger.ellipsis('Testing ellipsis, max 100 chars.', 100),
 	logger.br, logger.ellipsis('Testing ellipsis, max 10 chars.', 10, '....'),
 	logger.br, logger.ellipsis('1234567890', 6),
 	logger.br, logger.ellipsis('1234567890', 6, ';')
 );
-maxLengthLogger.info('This logger has a max length of 30, longer logs will be trimmed.')
+maxLengthLogger.info('This logger has a max length of 30, longer logs will be trimmed.');
 
 logger.log();
 logger.warn(logger.title('Now testing Groups...', { color: 'cyan', frameColor: 'magenta', align: 'right', type: 1 }));

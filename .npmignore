@@ -1,6 +1,7 @@
 .eslintrc
 .gitignore
 .vscode
+.npmignore
 node_modules
 test
 docs
