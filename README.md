@@ -14,7 +14,7 @@ logger.log('Some standard log.'); //Outputs: "Some standard log."
 ```
 ### Levels
 
-Levels can be customized with a 'levels' option passed to the logger.
+<!-- Levels can be customized with a 'levels' option passed to the logger. -->
 Default levels are inspired by log4j levels.
 
 | LEVEL | Color | Description |
@@ -32,7 +32,7 @@ Default levels are inspired by log4j levels.
 Several options are available to customize the logger.
 
 ```js
-const errLogger = require('pinecone-logger').new({ 
+const errLogger = require('pinecone-logger').apply({ 
 	name: 'errorLevelLogger',
 	nameTransform: false,
 	showDate: false,
@@ -52,13 +52,18 @@ errLogger.error('Some error!'); //Outputs: "[ERROR] errorLevelLogger - Some erro
 | dateFormat | "UTC" or "D MMM YYYY, HH:mm:ss.SSS Z" | Defines date format, requires "moment" for custom formats, only "UTC", "ISO" and "millis" are available otherwise. |
 | separator | "-" | Separator to use between log informations and log value. |
 | colorObjects | true | Enables standard utils.inpect() object coloration. |
+| disableColors | false | Disables all colors. |
 | inspectDepth | 3 | Defines utils.inpect() depth. |
 | showDate | true | Shows or hides date information. |
 | showLevel | true | Shows or hides level information. |
 | showName | true | Shows or hides name information. |
-| stdout | process.stdout | Stdout stream, can be any writable stream or object with .write(chunk) method. |
-| stderr | process.stderr | Stderr stream, can be any writable stream or object with .write(chunk) method. |
-| async | true | Makes the logger async. |
+| ellipsisAt | 64 | Ellipsis default max length. |
+| maxLength | 0 | Max log length, if a log is longer ellipsis will be used. |
+| output | null | Offers a single output solution for both stdout and stderr, is ignored if any of stdout and stderr are defined. |
+| stdout | process.stdout | Stdout, can be any writable stream, function, a string ("console", "stderr", "stdout") or an object with .write(chunk: string|object) method. |
+| stderr | process.stderr | Stderr, can be any writable stream, function, a string ("console", "stderr", "stdout") or an object with .write(chunk: string|object) method. |
+| noLog | false | Disables .log() method outputs. |
+| type | "string" | Can be both "string" or "json", if json log will be sent to any output as a JSON object. |
 | secretMask | "*" | Mask or Replacement Char for secrets, default *. |
 | secretLevel | "debug" | Required level for secrets to be visible. |
 | secretMaxLength | false | Limits the number of chars for masked secrets to improve readability. |
@@ -122,7 +127,7 @@ Timers help visualizing how long is a given task. Timers are accessible from any
 By resolving a timer its value will be returned and the timer itself will be deleted. Use "value" and "valueOf" to access value without stopping or destroying the timer.
 
 ```js
-const logger = require('pinecone-logger').new({ name: 'testLogger' });
+const logger = require('pinecone-logger').apply({ name: 'testLogger' });
 const timer = logger.timers.start('timer1');
 
 setTimeout(() => { // Waits 500ms
@@ -142,4 +147,108 @@ setTimeout(() => { // Waits 1400ms
 	// Outputs "Resolving timer after 1400ms, paused for 200ms: 1s 200ms (1200ms).".
 	// Timer counted only 1200ms as it was stopped for 200ms.
 }, 1400);
+```
+
+#### Title - *NEW FEATURE!*
+
+Title allows fast creation of standard titles.
+
+Title accepts a string, for single-line titles, or an array of strings, for multi-line titles.
+
+Three types are available:
+<!-- * Type 0 (*default*) -->
+```
+----------------------------
+-- This is a type 0 title --
+-- Aligned left           --
+----------------------------
+```
+<!-- * Type 1 -->
+```
+|----------------------------|
+|-- This is a type 1 title --|
+|--          Aligned right --|
+|----------------------------|
+```
+<!-- * Type 2 -->
+```
+   /-----------------------------/
+  /-- This is a type 2 title ---/
+ /---     Aligned center     --/
+/-----------------------------/
+```
+
+```ts 
+logger.title(title: string | string[], options?: object)
+```
+
+| Option | Default | Description |
+| ------ | ------ | ------ |
+| char | "-" | Frame char. |
+| type | 0 | Type of title. Can be 0, 1 or 2. |
+| sideChar | "\|", "/" | Side char(s). Available only for type 1 and 2. |
+| side | 2 | Represents how many "char" will be placed on text line sides. |
+| color | false | Text color. |
+| frameColor | false | Frame color. |
+| align | "left" | Multi-line text alignment. Can be "rignt", "left" or "center". |
+
+```js
+const logger = require('pinecone-logger').new({ name: 'titleLogger' });
+logger.log(logger.title('Single line title'));
+//  -----------------------
+//  -- Single line title --
+//  -----------------------
+
+logger.log(logger.title(['Multi line', '', 'Title'], { char: '=', type: 1, align: 'center', sideChar: '||', side: 0 }));
+//  ||============||
+//  || Multi line ||
+//  ||            ||
+//  ||   Title    ||
+//  ||============||
+```
+
+#### Ellipsis - *NEW FEATURE!*
+
+Ellipsis trims strims over a given length and places '...' (or else) at the end.
+
+```ts 
+logger.ellipsis(input: string, length?: number, replacement?: string); 
+```
+
+```js
+const logger = require('pinecone-logger').new({ name: 'titleLogger' });
+logger.log(logger.ellipsis('1234567890', 6)); // 123...
+logger.log(logger.ellipsis('1234567890', 6, ';')); // 12345;
+```
+
+#### Groups - *NEW FEATURE!*
+
+Groups can spread logs to multiple loggers with a single call.
+
+```ts 
+logger.newGroup(...members: Logger[]);
+
+group.add(members: Logger);
+group.remove(member: number|Logger);
+```
+
+```js
+const loggerParent = require('pinecone-logger');
+const loggerChild1 = require('pinecone-logger').new({ name: 'GroupMember1' });
+const loggerChild2 = require('pinecone-logger').new({ name: 'GroupMember2' });
+loggerParent.apply({ name: 'GroupLeader', level: 'info' });
+
+
+loggerParent.info('I\'ll be the group leader, my level is', loggerParent.level );
+loggerChild1.info('I\'ll be the group member 1, my level is', loggerChild1.level );
+loggerChild2.info('I\'ll be the group member 2, my level is', loggerChild2.level );
+logger.log();
+const loggerGroup = loggerParent.newGroup(loggerChild1);
+loggerGroup.info('This is from a group, should be printed twice.');
+loggerGroup.debug('This is also from a group, but should only be printed once from member 1 as leader level is "info".');
+loggerGroup.add(loggerChild2);
+loggerGroup.success('New logger added to group.', 'This should be printed three times.');
+loggerGroup.remove(0);
+loggerGroup.remove(loggerChild2);
+loggerGroup.warn('All members removed from group.', 'This should be printed once.');
 ```
