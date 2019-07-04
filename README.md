@@ -209,7 +209,7 @@ logger.log(logger.title(['Multi line', '', 'Title'], { char: '=', type: 1, align
 
 #### Ellipsis - *NEW FEATURE!*
 
-Ellipsis trims strims over a given length and places '...' (or else) at the end.
+Ellipsis trims strings over a given length and places '...' (or else) at the end.
 
 ```ts 
 logger.ellipsis(input: string, length?: number, replacement?: string); 
