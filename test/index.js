@@ -123,5 +123,3 @@ const negativelogger = require('..').new({ name: 'negativelogger', level: -2 });
 negativelogger.info('I have a logger level of -2.');
 negativelogger.fatal('I have a logger level of -2.');
 negativelogger.log('I have a logger level of -2.');
-
-logger

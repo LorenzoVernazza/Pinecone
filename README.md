@@ -60,8 +60,8 @@ errLogger.error('Some error!'); //Outputs: "[ERROR] errorLevelLogger - Some erro
 | ellipsisAt | 64 | Ellipsis default max length. |
 | maxLength | 0 | Max log length, if a log is longer ellipsis will be used. |
 | output | null | Offers a single output solution for both stdout and stderr, is ignored if any of stdout and stderr are defined. |
-| stdout | process.stdout | Stdout, can be any writable stream or object with .write(chunk: string) method. |
-| stderr | process.stderr | Stderr, can be any writable stream or object with .write(chunk: string) method. |
+| stdout | process.stdout | Stdout, can be any writable stream, function, a string ("console", "stderr", "stdout") or an object with .write(chunk: string|object) method. |
+| stderr | process.stderr | Stderr, can be any writable stream, function, a string ("console", "stderr", "stdout") or an object with .write(chunk: string|object) method. |
 | noLog | false | Disables .log() method outputs. |
 | type | "string" | Can be both "string" or "json", if json log will be sent to any output as a JSON object. |
 | secretMask | "*" | Mask or Replacement Char for secrets, default *. |
@@ -186,7 +186,7 @@ logger.title(title: string | string[], options?: object)
 | ------ | ------ | ------ |
 | char | "-" | Frame char. |
 | type | 0 | Type of title. Can be 0, 1 or 2. |
-| sideChar | "\|\|", "//" | Side char(s). Available only for type 1 and 2. |
+| sideChar | "\|", "/" | Side char(s). Available only for type 1 and 2. |
 | side | 2 | Represents how many "char" will be placed on text line sides. |
 | color | false | Text color. |
 | frameColor | false | Frame color. |
