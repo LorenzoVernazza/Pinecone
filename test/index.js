@@ -14,25 +14,24 @@ logger.debug('Debug log!');
 logger.trace('Trace log!');
 logger.log();
 
+const loggerEmitter = logger.emitter('testEmitter'); //emitter
+loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!'); //emitter
 logger.warn(logger.title(['I\'m a title!', '', 'Now testing .apply() and loggers hierarchy.'], { color: 'cyan', frameColor: 'magenta' }));
 logger.apply({ disableColors: true });
 const sadLogger = require('..').new({ name: 'sadLogger', level: 'info' });
 logger.info('Colors have been disabled.', testObject);
-sadLogger.info('Colors been disabled for me too since i was created after.', testObject);
+loggerEmitter.info('I inherit my father\'s options so Colors have been disabled for me too.', testObject);
+sadLogger.info('Colors have been disabled for me too since i was created after.', testObject);
 infoLogger.info('Colors have not been disabled for me since i was created before.', testObject);
 logger.apply({ disableColors: false });
 logger.info('Colors have been restored.', testObject);
+loggerEmitter.info('Colors have been restored for me too.', testObject);
 sadLogger.info('Colors are still disabled for me.', testObject);
 infoLogger.info('Colors are still enabled for me.', testObject);
-// const loggerEmitter = logger.emitter('testEmitter');
-// loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!');
 logger.log();
 logger.warn(logger.title(['I\'m a centered title with type 1, char "=" and sideChar "||"!', '', 'Now testing Secrets.'], { color: 'cyan', frameColor: 'magenta', char: '=', type: 1, align: 'center', sideChar: '||', side: 0 }));
 
 logger.info('I log up to "trace" so this secret is clear:', logger.secret('some secret'));
-// loggerEmitter.info('I inherit my father\'s options so even this secret is clear:', logger.secret('some secret', {
-// 	maxLength: 4
-// }));
 logger.info('I even work with objects:', logger.secret(logger.br + 'Test:'), logger.secret(testObject));
 
 infoLogger.info('I instead log up to "info" so this secret is masked:', infoLogger.secret('some secret'));
