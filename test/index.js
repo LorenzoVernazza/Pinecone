@@ -14,7 +14,7 @@ logger.debug('Debug log!');
 logger.trace('Trace log!');
 logger.log();
 
-logger.log('Package informations:', logger.package('version'), logger.package.version, logger.package.name);
+logger.log('Package informations:', logger.package.version, logger.package('version'), logger.package.name);
 logger.package.unload();
 
 const loggerEmitter = logger.emitter('testEmitter'); // emitter
