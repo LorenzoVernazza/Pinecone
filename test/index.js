@@ -14,8 +14,11 @@ logger.debug('Debug log!');
 logger.trace('Trace log!');
 logger.log();
 
-const loggerEmitter = logger.emitter('testEmitter'); //emitter
-loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!'); //emitter
+logger.log('Package informations:', logger.package('version'), logger.package.version, logger.package.name);
+logger.package.unload();
+
+const loggerEmitter = logger.emitter('testEmitter'); // emitter
+loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!'); // emitter
 logger.warn(logger.title(['I\'m a title!', '', 'Now testing .apply() and loggers hierarchy.'], { color: 'cyan', frameColor: 'magenta' }));
 logger.apply({ disableColors: true });
 const sadLogger = require('..').new({ name: 'sadLogger', level: 'info' });

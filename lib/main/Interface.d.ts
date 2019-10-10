@@ -2,6 +2,7 @@ import BR from '../classes/BR';
 import Group from '../classes/Group';
 import Secret from '../classes/Secret';
 import Timers from '../classes/Timers';
+import Package from '../classes/Package';
 import Title from '../classes/Title';
 import { inspect, colorize } from '../utils';
 import { Stream } from 'stream';
@@ -139,6 +140,8 @@ declare class Logger extends LogEmitter {
     emitter(/** Emitter name, defaults as "emitter". */): LogEmitter;
     /** Create, delete, resolve timers. */
     timers = Timers;
+    /** Retrieves informations from package.json. */
+    package = Package;
     /** Add a new line to the log and a *separator* at the start of the new line. */
     br = new BR();
 }

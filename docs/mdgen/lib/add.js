@@ -16,7 +16,7 @@ const ask = (message = '') => new Promise((resolve) => {
 	message && process.stdout.write(message);
 	var output = '';
 	process.stdin.resume();
-	process.stdin.on('data', function (d) {
+	process.stdin.on('data', function(d) {
 		var input = d.toString().trim();
 		var empty = false;
 		if (input !== '') {
@@ -34,7 +34,7 @@ const ask = (message = '') => new Promise((resolve) => {
 const confirm = (message = 'Confirm?') => new Promise((resolve) => {
 	message && process.stdout.write(message + ' (Y/n) ');
 	process.stdin.resume();
-	process.stdin.on('data', function (d) {
+	process.stdin.on('data', function(d) {
 		process.stdin.pause();
 		resolve(d.toString().trim().toLowerCase() !== 'n');
 	});
