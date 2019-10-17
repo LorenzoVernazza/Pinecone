@@ -91,7 +91,9 @@ declare type SecretOptions = {
     /** Level at wich the secret will be hidden. */
     level?: string,
     /** Limits the hidden secret's length when *mask* is single char. */
-    maxLength?: number
+    maxLength?: number,
+    /** Returns an array of secrets. */
+    iterable?: boolean
 };
 /**
  * Log Emitter instance.
@@ -136,8 +138,8 @@ declare class Logger extends LogEmitter {
     /** Creates a new title. */
     title(/** Single-line title, use an array for multi-line titles. */title: string, /** Title options */options?: TitleOptions): string;
     title(/** Multi-line title, use a string for single-line titles. */title: string[], /** Title options */options?: TitleOptions): string;
-    /** Creates a new emitter. An emitter inherits parent configurations, appends ots name to parent name and contains only log methods. */
-    emitter(/** Emitter name, defaults as "emitter". */): LogEmitter;
+    /** Creates a new emitter. An emitter inherits parent configurations, appends its name to parent name and contains only log methods. */
+    emitter(/** Emitter name, defaults as "emitter". */name): LogEmitter;
     /** Create, delete, resolve timers. */
     timers = Timers;
     /** Retrieves informations from package.json. */

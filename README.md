@@ -84,6 +84,7 @@ const debugLogger = require('pinecone-logger').new({
 const user = "foo";
 const password = "bar123!";
 const secret = infoLogger.secret(password);
+const iterableSecret = infoLogger.secret([logger.br, 'User:', user, logger.br, 'Password:', password], { iterable: true , mask: '' });
 
 // When the secret is a single argument it is resolved while the log is processed by the logger.
 infoLogger.info('User', user, 'logged in with password:', secret); //Outputs: "User foo logged in with password *******".
@@ -94,6 +95,10 @@ infoLogger.info('User ' + user + ' logged in with password: ' + secret); //Outpu
 debugLogger.info('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
 console.log('User ' + user + ' logged in with password: ' + secret); //Outputs: "User foo logged in with password *******".
 debugLogger.info('User ' + user + ' logged in with password: ' + debugLogger.secret(password)); //Outputs "User foo logged in with password bar123!" since both debugLogger and secret levels are "debug".
+
+// Iterable returns an array of secrets. Mask replaces the default '*'.
+infoLogger.info('New user logged in.', ...iterableSecret); //Outputs: "New user logged in.".
+debugLogger.info('New user logged in.', ...iterableSecret); //Outputs: "New user logged in.\n - User: foo \n - Password: bar123!".
 ```
 
 ### Timers
@@ -149,7 +154,7 @@ setTimeout(() => { // Waits 1400ms
 }, 1400);
 ```
 
-#### Title - *NEW FEATURE!*
+#### Title
 
 Title allows fast creation of standard titles.
 
@@ -207,7 +212,7 @@ logger.log(logger.title(['Multi line', '', 'Title'], { char: '=', type: 1, align
 //  ||============||
 ```
 
-#### Ellipsis - *NEW FEATURE!*
+#### Ellipsis
 
 Ellipsis trims strings over a given length and places '...' (or else) at the end.
 
@@ -221,7 +226,7 @@ logger.log(logger.ellipsis('1234567890', 6)); // 123...
 logger.log(logger.ellipsis('1234567890', 6, ';')); // 12345;
 ```
 
-#### Groups - *NEW FEATURE!*
+#### Groups
 
 Groups can spread logs to multiple loggers with a single call.
 

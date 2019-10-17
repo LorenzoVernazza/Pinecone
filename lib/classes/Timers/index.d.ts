@@ -31,11 +31,11 @@ declare class Timer {
 /**
  * Finds Timer by name.
  */
-function getByName(/** Timer name. */findName: string): Timer | undefined;
+function getByName(/** Timer name. */findName: string): Timer;
 /**
  * Finds Timer by name or id.
  */
-function getTimer(/** Timer name or id. */idOrName: string | number): Timer | undefined;
+function getTimer(/** Timer name or id. */idOrName: string | number): Timer;
 /**
  * Creates new timer.
  */
@@ -43,11 +43,11 @@ function newTimer(/** Timer name. */name?: string): Timer;
 /**
  * Finds and starts a timer.
  */
-function start(/** Timer name or id. */idOrName: string | number): void;
+function start(/** Timer name or id. */idOrName: string | number): Timer;
 /**
  * Finds and stops a timer.
  */
-function stop(/** Timer name or id. */idOrName: string | number): void;
+function stop(/** Timer name or id. */idOrName: string | number): boolean;
 /**
  * Finds and resolves a timer.
  */
