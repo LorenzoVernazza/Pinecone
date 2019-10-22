@@ -1,4 +1,5 @@
 import BR from '../classes/BR';
+import NSP from '../classes/NSP';
 import Group from '../classes/Group';
 import Secret from '../classes/Secret';
 import Timers from '../classes/Timers';
@@ -146,6 +147,8 @@ declare class Logger extends LogEmitter {
     package = Package;
     /** Add a new line to the log and a *separator* at the start of the new line. */
     br = new BR();
+    /** Ignore next space in comma-separated logs. */
+    nsp = new NSP();
 }
 
 export = Logger
