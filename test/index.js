@@ -84,7 +84,7 @@ loggerGroup.add(loggerChild2);
 loggerGroup.add(loggerChildJSON);
 loggerGroup.success('New logger added to group.', 'This should be printed four times.');
 loggerGroup.info('Testing secrets:', logger.secret('This should be hidden for leader and 2'));
-loggerGroup.info('Testing secrets', logger.nsp, logger.secret([': This should show only for 1.'], { mask: '.', level: 'trace', maxLength: 1 }));
+loggerGroup.info('Testing secrets', logger.nsp, logger.secret(': This should show only for 1.', { mask: '.', level: 'trace', maxLength: 1 }));
 loggerGroup.remove(loggerChildJSON);
 loggerGroup.remove(loggerChild2);
 loggerGroup.remove(0);
