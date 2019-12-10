@@ -106,20 +106,33 @@ logger.success('Standard object:', obj1);
 logger.success('Overloaded object:', obj2);
 
 const timer = logger.timers.start('timer1');
+const hrTimer = logger.timers.start('hrtimer1', 'hr');
 
 setTimeout(() => {
 	const value = timer.value;
-	logger.log('Testing timer after 500ms: ' + value.pretty + '(' + value + 'ms).');
-	logger.log('Pausing timer for 200ms');
+	const hrvalue = hrTimer.value;
+
+	logger.log('Testing timers after 500ms:',
+		logger.br, value.pretty + ' (' + value + 'ms).',
+		logger.br, `${hrvalue.pretty} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`
+	);
+
+	logger.log('Pausing timers for 200ms');
 	timer.stop();
+	hrTimer.stop();
 	setTimeout(() => {
 		logger.timers.start('timer1');
+		logger.timers.start('hrtimer1');
 	}, 200);
 }, 500);
 
 setTimeout(() => {
 	const value = logger.timers.resolve(timer.toString());
-	logger.log('Resolving timer after 1400ms, paused for 200ms: ' + value.pretty + '(' + value + 'ms).');
+	const hrvalue = logger.timers.resolve(hrTimer.toString());
+	logger.log('Resolving timers after 1400ms, paused for 200ms:',
+		logger.br, 'Timer:', value.pretty + ' (' + value + 'ms).',
+		logger.br, `High Resolution Timer: ${hrvalue.pretty} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`
+	);
 }, 1400);
 
 const zerologger = require('..').new({ name: 'zerologger', level: 0 });

@@ -17,9 +17,33 @@ declare class Timer {
 	/** Timer id. */
 	get id(): number;
 	/** Starts the timer. */
-	start(): void;
+	start(): Timer;
 	/** Stops the timer. */
-	stop(): void;
+	stop(): Timer;
+	/** Resolves the timer: deletes timer and returns value. */
+	resolve(): { pretty: string } | number;
+	/** Returns Timer id. */
+	toString() {
+		return this.id;
+	}
+}
+
+declare class HRTimer {
+	/** Timer stored value. */
+	value: { pretty: string, seconds: number, nanoseconds: number } | number;
+	/** Timer start second. */
+	seconds: number;
+	/** Timer start nanosecond. */
+	nanoseconds: number;
+	/** Timer id. */
+	id: number;
+	constructor(/** Timer id. */id: number, /** Timer name. */name?: string);
+	/** Timer id. */
+	get id(): number;
+	/** Starts the timer. */
+	start(): Timer;
+	/** Stops the timer. */
+	stop(): Timer;
 	/** Resolves the timer: deletes timer and returns value. */
 	resolve(): { pretty: string } | number;
 	/** Returns Timer id. */
@@ -31,19 +55,23 @@ declare class Timer {
 /**
  * Finds Timer by name.
  */
-function getByName(/** Timer name. */findName: string): Timer;
+function getByName(/** Timer name. */findName: string): Timer|HRTimer;
 /**
  * Finds Timer by name or id.
  */
-function getTimer(/** Timer name or id. */idOrName: string | number): Timer;
+function getTimer(/** Timer name or id. */idOrName: string | number): Timer|HRTimer;
 /**
  * Creates new timer.
  */
-function newTimer(/** Timer name. */name?: string): Timer;
+function newTimer(/** Timer name. */name?: string, /** High Resolution timer. */hrTimer?: falsr): Timer;
+/**
+ * Creates new high resolution timer.
+ */
+function newTimer(/** Timer name. */name?: string, /** High Resolution timer. */hrTimer: true): HRTimer;
 /**
  * Finds and starts a timer.
  */
-function start(/** Timer name or id. */idOrName: string | number): Timer;
+function start(/** Timer name or id. */idOrName: string | number, /** Create timer if given name does not exist. Pass 'hr' for HR timer. */createIfMissing?: boolean | 'hr'): Timer|HRTimer;
 /**
  * Finds and stops a timer.
  */
