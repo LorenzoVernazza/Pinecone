@@ -114,7 +114,9 @@ setTimeout(() => {
 
 	logger.log('Testing timers after 500ms:',
 		logger.br, value.pretty + ' (' + value + 'ms).',
-		logger.br, `${hrvalue.pretty} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`
+		value.values,
+		logger.br, `${hrvalue.prettyPrint(true, 'bgCyan', 'magenta')} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`,
+		hrvalue.values
 	);
 
 	logger.log('Pausing timers for 200ms');
@@ -131,7 +133,7 @@ setTimeout(() => {
 	const hrvalue = logger.timers.resolve(hrTimer.toString());
 	logger.log('Resolving timers after 1400ms, paused for 200ms:',
 		logger.br, 'Timer:', value.pretty + ' (' + value + 'ms).',
-		logger.br, `High Resolution Timer: ${hrvalue.pretty} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`
+		logger.br, `High Resolution Timer: ${hrvalue.prettyPrint(false, 'yellow', 'red')} (${hrvalue.seconds}s ${hrvalue.nanoseconds}ns | ${hrvalue}ms).`
 	);
 }, 1400);
 

@@ -1,5 +1,14 @@
-const timers = {};
-var globalIndex = 0;
+import { Color } from '../../types';
+
+declare type TimerValue = {
+	/** Values by time fractions. */values: object,
+	/** Pretty prints values with default settings. */pretty: string,
+	/** Pretty prints values with custom settings. */prettyPrint(
+		/** Toggles *small* ('h') or *full* ('hours') units, default *small* (true). */small?: boolean,
+		/** Digits color, default *null*. */digitsColor ?: Color,
+		/** Units color, default *null*. */unitsColor ?: Color
+	): string
+} | string;
 
 /**
  * Converts milliseconds to a human-readable string.
@@ -8,7 +17,7 @@ function prettify(/** Time in milliseconds */time: number): string;
 
 declare class Timer {
 	/** Timer stored value. */
-	value: { pretty: string } | number;
+	value: TimerValue;
 	/** Timer start date (millis). */
 	time: number;
 	/** Timer id. */
@@ -21,7 +30,7 @@ declare class Timer {
 	/** Stops the timer. */
 	stop(): Timer;
 	/** Resolves the timer: deletes timer and returns value. */
-	resolve(): { pretty: string } | number;
+	resolve(): TimerValue;
 	/** Returns Timer id. */
 	toString() {
 		return this.id;
@@ -30,7 +39,7 @@ declare class Timer {
 
 declare class HRTimer {
 	/** Timer stored value. */
-	value: { pretty: string, seconds: number, nanoseconds: number } | number;
+	value: TimerValue;
 	/** Timer start second. */
 	seconds: number;
 	/** Timer start nanosecond. */
@@ -45,7 +54,7 @@ declare class HRTimer {
 	/** Stops the timer. */
 	stop(): Timer;
 	/** Resolves the timer: deletes timer and returns value. */
-	resolve(): { pretty: string } | number;
+	resolve(): TimerValue;
 	/** Returns Timer id. */
 	toString() {
 		return this.id;

@@ -1,3 +1,5 @@
+import { Color } from '../types';
+
 type InspectOptions = {
     /** Color objects. */
     colors: boolean,
@@ -21,7 +23,7 @@ function isFalse(/** Input to check. */input: any): boolean;
 function inspect(/** Element to inspect. */element, options: InspectOptions): string;
     
 /** Colorize text. */
-function colorize(/** Input to color. */input: string, /** Color to use. */color: string): string;
+function colorize(/** Input to color. */input: string, /** Color to use. */color: Color): string;
 
 /** Pads a string. */
 function padString(/** String to pad. */input: string, /** Number of chars to add. */number: number, /** Char to fill with. */fill: string, /** Pads from start instead of end. */start: boolean): string;

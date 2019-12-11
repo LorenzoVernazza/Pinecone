@@ -1,3 +1,4 @@
+import { Level, Color } from '../types';
 import BR from '../classes/BR';
 import NSP from '../classes/NSP';
 import Group from '../classes/Group';
@@ -8,8 +9,6 @@ import Title from '../classes/Title';
 import { inspect, colorize } from '../utils';
 import { Stream } from 'stream';
 
-declare type Level = 'fatal' | 'error' | 'warn' | 'success' | 'info' | 'debug' | 'trace';
-declare type Color = false | 'red' | 'green' | 'yellow' | 'blue' | 'cyan' | 'magenta' | 'gray' | 'white' | 'black'  | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgCyan' | 'bgMagenta' | 'bgGray' | 'bgWhite' | 'bgBlack';
 declare type LoggerOptions = {
     /** 
      * Maximum log level to process and print..
