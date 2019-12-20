@@ -23,6 +23,11 @@ exports.levels = [{
 	color: 'blue'
 }];
 
+exports.common = {
+	packagePath: process.env.PINECONE_PACKAGE_PATH || require.main.path,
+	packageName: process.env.PINECONE_PACKAGE_NAME || 'package.json'
+};
+
 exports.defaults = {
 	// mode: process.env.PINECONE_MODE || 'async',
 

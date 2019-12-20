@@ -1,13 +1,14 @@
+import { Level, Color } from '../types';
 import BR from '../classes/BR';
+import NSP from '../classes/NSP';
 import Group from '../classes/Group';
 import Secret from '../classes/Secret';
 import Timers from '../classes/Timers';
+import Package from '../classes/Package';
 import Title from '../classes/Title';
 import { inspect, colorize } from '../utils';
 import { Stream } from 'stream';
 
-declare type Level = 'fatal' | 'error' | 'warn' | 'success' | 'info' | 'debug' | 'trace';
-declare type Color = false | 'red' | 'green' | 'yellow' | 'blue' | 'cyan' | 'magenta' | 'gray' | 'white' | 'black'  | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgCyan' | 'bgMagenta' | 'bgGray' | 'bgWhite' | 'bgBlack';
 declare type LoggerOptions = {
     /** 
      * Maximum log level to process and print..
@@ -90,12 +91,35 @@ declare type SecretOptions = {
     /** Level at wich the secret will be hidden. */
     level?: string,
     /** Limits the hidden secret's length when *mask* is single char. */
-    maxLength?: number
+    maxLength?: number,
+    /** Returns an array of secrets. */
+    iterable?: boolean
 };
+/**
+ * Log Emitter instance.
+ */
+declare class LogEmitter {
+    /** Standard log, no additional data is printed. */
+    log(...values: any): void;
+    /** Severe errors that cause premature termination. Color: Red BG.  */
+    fatal(...values: any): void;
+    /** Runtime errors or unexpected conditions. Color: Red.  */
+    error(...values: any): void;
+    /** Use of deprecated APIs, poor use of API, 'almost' errors, other runtime situations that are undesirable or unexpected, but not necessarily "wrong". Color: Yellow.  */
+    warn(...values: any): void;
+    /** Successful events, completion of long tasks. Color: Green  */
+    success(...values: any): void;
+    /** Interesting runtime events (startup/shutdown). Color: Cyan.  */
+    info(...values: any): void;
+    /** Detailed information on the flow through the system. Color: Magenta.  */
+    debug(...values: any): void;
+    /** Most detailed information. Color: Blue.  */
+    trace(...values: any): void;
+}
 /**
  * Logger instance.
  */
-declare class Logger {
+declare class Logger extends LogEmitter {
     constructor (options?: LoggerOptions)
     /** Applies new configurations to logger. Loggers created from this before the new config is applied won't be affected. */
     apply(/** Options to change. */newOptions: LoggerOptions): this;
@@ -114,27 +138,16 @@ declare class Logger {
     /** Creates a new title. */
     title(/** Single-line title, use an array for multi-line titles. */title: string, /** Title options */options?: TitleOptions): string;
     title(/** Multi-line title, use a string for single-line titles. */title: string[], /** Title options */options?: TitleOptions): string;
+    /** Creates a new emitter. An emitter inherits parent configurations, appends its name to parent name and contains only log methods. */
+    emitter(/** Emitter name, defaults as "emitter". */name): LogEmitter;
     /** Create, delete, resolve timers. */
     timers = Timers;
+    /** Retrieves informations from package.json. */
+    package = Package;
     /** Add a new line to the log and a *separator* at the start of the new line. */
     br = new BR();
-
-    /** Standard log, no additional data is printed. */
-    log(...values: any): void;
-    /** Severe errors that cause premature termination. Color: Red BG.  */
-    fatal(...values: any): void;
-    /** Runtime errors or unexpected conditions. Color: Red.  */
-    error(...values: any): void;
-    /** Use of deprecated APIs, poor use of API, 'almost' errors, other runtime situations that are undesirable or unexpected, but not necessarily "wrong". Color: Yellow.  */
-    warn(...values: any): void;
-    /** Successful events, completion of long tasks. Color: Green  */
-    success(...values: any): void;
-    /** Interesting runtime events (startup/shutdown). Color: Cyan.  */
-    info(...values: any): void;
-    /** Detailed information on the flow through the system. Color: Magenta.  */
-    debug(...values: any): void;
-    /** Most detailed information. Color: Blue.  */
-    trace(...values: any): void;
+    /** Ignore next space in comma-separated logs. */
+    nsp = new NSP();
 }
 
 export = Logger

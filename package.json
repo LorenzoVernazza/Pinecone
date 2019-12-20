@@ -1,6 +1,6 @@
 {
   "name": "pinecone-logger",
-  "version": "2.0.0",
+  "version": "2.3.3",
   "description": "Small Javascript logger",
   "main": "index.js",
   "directories": {
@@ -17,7 +17,9 @@
   "optionalDependencies": {
     "moment": "^2.24.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-config-tidy-octopus": "^0.1.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LorenzoVernazza/Pinecone.git"

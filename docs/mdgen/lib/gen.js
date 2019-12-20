@@ -5,7 +5,7 @@ const { name } = require('../config/vars.json');
 function fillTemplate({
 	version,
 	date
-}, changelog, old, next){
+}, changelog, old, next) {
 	var template = '';
 	template += `# <b>${name} v${version} (Current), ${date}</b>\n${removeComments(changelog)}\n`;
 	if (next) {
@@ -17,7 +17,7 @@ function fillTemplate({
 	return template;
 }
 
-function removeComments(text){
+function removeComments(text) {
 	return text.replace(/<!--.*?-->\s*/sg, '');
 }
 
@@ -29,7 +29,7 @@ function updateChangelogs() {
 	return template;
 }
 
-function updateRelease({ version, date }){
+function updateRelease({ version, date }) {
 	const changelog = fs.readFileSync(path.resolve(__dirname, '../CHANGELOG.md')).toString();
 	var returnFile = removeComments(changelog);
 	var template =
