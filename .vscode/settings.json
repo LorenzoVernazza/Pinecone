@@ -1,5 +1,7 @@
 {
     "eslint.trace.server": "messages",
-    "eslint.autoFixOnSave": true,
-    "debug.node.autoAttach": "on"
+    "debug.node.autoAttach": "on",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
