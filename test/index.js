@@ -90,6 +90,11 @@ loggerGroup.remove(loggerChild2);
 loggerGroup.remove(0);
 loggerGroup.warn('All members removed from group.', 'This should be printed once.');
 
+// Quotes
+logger.log(logger.title('Now testing Quotes...', { color: 'green', frameColor: 'red', align: 'right', type: 1 }));
+logger.info('Testing', logger.singleQuote('quotes'), logger.nsp, '.');
+logger.info('Testing', logger.doubleQuote('double', 'quotes'), logger.nsp, '.');
+logger.info('Testing', logger.backTickQuote(['back', 'tick', 'quotes']), logger.nsp, '.');
 logger.log();
 logger.warn(logger.title(['I\'m a right-aligned title with type 2!', '', 'Now testing Timers.'], { color: 'cyan', frameColor: 'magenta', align: 'right', type: 2 }));
 
