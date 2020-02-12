@@ -18,8 +18,20 @@ logger.log();
 logger.log('Package informations:', logger.package.version, logger.package('version'), logger.package.name);
 logger.package.unload();
 
+const loggerWithRequirements = logger.new({ name: 'loggerWithRequirements', level: 'trace', requiredLevel: 'debug' });
+loggerWithRequirements.info('I have a required level of "debug" so this should be visible as my level is "trace".');
+loggerWithRequirements.apply({ level: 'info' });
+loggerWithRequirements.info('I have a required level of "debug" so this shouldn\'t be visible even if my level is "info".');
+
 const loggerEmitter = logger.emitter('testEmitter'); // emitter
+const loggerEmitterDebug = logger.emitter('testEmitterDebug', { requiredLevel: 'debug' }); // emitter2
 loggerEmitter.success('Hello world!', logger.br, 'I am an emitter for traceLogger!'); // emitter
+loggerEmitterDebug.success('Hello world!', logger.br, 'I am an emitter for traceLogger, i log any level but only with traceLogger level >= debug!'); // emitter 2
+logger.apply({ level: 'info' });
+loggerEmitter.info('This should be visible as i log always');
+loggerEmitterDebug.info('But this should not as i log only with level >= debug');
+logger.apply({ level: 'trace' });
+
 logger.warn(logger.title(['I\'m a title!', '', 'Now testing .apply() and loggers hierarchy.'], { color: 'cyan', frameColor: 'magenta' }));
 logger.apply({ disableColors: true });
 const sadLogger = require('..').new({ name: 'sadLogger', level: 'info' });

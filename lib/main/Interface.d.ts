@@ -57,6 +57,8 @@ declare type LoggerOptions = {
     secretLevel: Level,
     /** Limits the number of chars for masked secrets to improve readability. Default: false. */
     secretMaxLength: number | false,
+    /** Required level for any log to be logged. Defaults at 0 (no requirements). */
+    requiredLevel: Level
 };
 declare type TitleOptions = {
     /** Frame char. Default: "-" */
@@ -95,6 +97,11 @@ declare type SecretOptions = {
     /** Returns an array of secrets. */
     iterable?: boolean
 };
+declare type EmitterOptions = {
+    /** Required level for any log to be logged. Only works when higher than the parents's. */
+    requiredLevel?: string
+};
+
 /**
  * Log Emitter instance.
  */
@@ -139,7 +146,7 @@ declare class Logger extends LogEmitter {
     title(/** Single-line title, use an array for multi-line titles. */title: string, /** Title options */options?: TitleOptions): string;
     title(/** Multi-line title, use a string for single-line titles. */title: string[], /** Title options */options?: TitleOptions): string;
     /** Creates a new emitter. An emitter inherits parent configurations, appends its name to parent name and contains only log methods. */
-    emitter(/** Emitter name, defaults as "emitter". */name): LogEmitter;
+    emitter(/** Emitter name, defaults as "emitter". */name, /** Emitter options. */options?: EmitterOptions): LogEmitter;
     /** Create, delete, resolve timers. */
     timers = Timers;
     /** Retrieves informations from package.json. */
